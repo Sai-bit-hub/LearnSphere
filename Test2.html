@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LearnSphere Courses</title>
+
+    <link rel="stylesheet" href="style4.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        body{
+            background:#f4f7fb;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:linear-gradient(90deg,#8188b7,#363fbc);
+    padding:14px 32px;
+    color:white;
+    box-shadow : 0 4px 12px rgba(0,0,0, 0.15); 
+    position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .logo img{
+            width:50px;
+            height:50px;
+            border-radius:50%;
+        }
+
+        .logo p{
+            font-size:25px;
+            font-weight:bold;
+            color:#0077ff;
+        }
+
+        .menu ul{
+            display:flex;
+            list-style:none;
+            gap:20px;
+        }
+
+        .menu ul li{
+            position:relative;
+        }
+
+        .menu ul li a{
+            text-decoration:none;
+            color:black;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .menu ul li a:hover{
+            color:#0077ff;
+        }
+
+        /* DROPDOWN */
+
+        .dropdown-menu{
+            display:none;
+            position:absolute;
+            background:white;
+            top:30px;
+            left:0;
+            min-width:220px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.2);
+            border-radius:10px;
+            padding:10px 0;
+        }
+
+        .dropdown-menu li{
+            padding:10px;
+        }
+
+        .dropdown:hover .dropdown-menu{
+            display:block;
+        }
+
+        .search-box input{
+            padding:10px;
+            border-radius:20px;
+            border:1px solid gray;
+            width:220px;
+        }
+
+        .account{
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        /* TITLE */
+
+        .main-title{
+            text-align:center;
+            margin-top:30px;
+            font-size:45px;
+            color:#333;
+        }
+
+        /* COURSE CARDS */
+
+       .main{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    padding:40px;
+    justify-items:center;
+}
+
+.box2{
+    width:320px;
+    height:500px;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    transition:0.3s;
+    display:flex;
+    flex-direction:column;
+}
+.box2 p{
+    margin:12px 18px;
+    font-size:16px;
+}
+
+.box2 h2{
+    text-align:center;
+    padding:15px;
+    color:#0077ff;
+}
+
+.image{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+}
+@media(max-width:992px){
+
+    .main{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .main{
+        grid-template-columns:1fr;
+    }
+}
+        .box2:hover{
+            transform:translateY(-10px);
+        }
+
+        .image{
+            width:100%;
+            height:150px;
+            object-fit:cover;
+        }
+
+        .box2 h2{
+            margin:15px 0;
+            color:#0077ff;
+        }
+
+        .box2 p{
+            margin:10px 20px;
+        }
+
+        .button{
+            margin:20px;
+            width:85%;
+            padding:12px;
+            border:none;
+            background:#28a745;
+            color:white;
+            font-size:18px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .button:hover{
+            background:#1f8a38;
+        }
+
+        /* POPUP FORM */
+
+        .popup{
+            width:100%;
+            height:100vh;
+            background:rgba(0,0,0,0.6);
+            position:fixed;
+            top:0;
+            left:0;
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:2000;
+        }
+
+        .popup-content{
+            width:400px;
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            position:relative;
+            animation:popup 0.4s ease;
+        }
+
+        @keyframes popup{
+            from{
+                transform:scale(0.5);
+            }
+
+            to{
+                transform:scale(1);
+            }
+        }
+
+        .popup-content h2{
+            text-align:center;
+            margin-bottom:20px;
+            color:#0077ff;
+        }
+
+        .popup-content input,
+        .popup-content select{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid gray;
+            border-radius:10px;
+        }
+
+        .submit-btn{
+            width:100%;
+            padding:12px;
+            background:#0077ff;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:18px;
+            cursor:pointer;
+            margin-top:15px;
+        }
+
+        .close{
+            position:absolute;
+            top:15px;
+            right:20px;
+            font-size:25px;
+            cursor:pointer;
+            color:red;
+        }
+
+        .success{
+            text-align:center;
+            color:green;
+            margin-top:15px;
+            display:none;
+            font-weight:bold;
+        }
+        .dropdown-menu{
+    display:none;
+    position:absolute;
+    top:30px;
+    left:0;
+    background:white;
+    min-width:220px;
+    border-radius:10px;
+    padding:5px 0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.dropdown-menu li{
+    list-style:none;
+}
+
+.dropdown-menu li a{
+    display:block;
+    padding:12px 18px;
+    color:black;
+    text-decoration:none;
+}
+
+.dropdown-menu li a:hover{
+    background:#f4f7fb;
+    color:#0077ff;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- ABOUT POPUP -->
+
+<div class="popup" id="aboutPopup">
+
+    <div class="popup-content">
+
+        <span class="close"
+        onclick="closeAbout()">×</span>
+
+        <h2>About LearnSphere</h2>
+
+        <p>
+
+            LearnSphere is an online learning platform
+            designed for students to gain real-world
+            technical skills.
+
+            We provide courses in Web Development,
+            AI, Data Science, Cloud Computing and more.
+
+        </p>
+
+        <br>
+
+        <h3>🎯 Our Mission</h3>
+
+        <p>
+            To help students become industry-ready
+            with practical learning and projects.
+        </p>
+
+    </div>
+
+</div>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <img src="logo.jpg" alt="logo">
+            <p>LearnSphere</p>
+        </div>
+
+        <nav class="menu">
+            <ul>
+
+                <!-- HOME BUTTON -->
+
+                <li><a href="index.html">Home</a></li>
+
+                <li class="dropdown">
+
+    <a href="#">Courses ▼</a>
+
+    <ul class="dropdown-menu">
+
+        <li>
+            <a href="#"
+            onclick="showCourseDetails(
+            'Web Development',
+            'Learn how to build modern websites using frontend and backend technologies.',
+            'HTML, CSS, JavaScript, React, Node.js'
+            )">
+            Web Development
+            </a>
+        </li>
+
+        <li>
+            <a href="#"
+            onclick="showCourseDetails(
+            'Data Science',
+            'Learn data analysis, visualization and machine learning using Python.',
+            'Python, Pandas, NumPy, Machine Learning'
+            )">
+            Data Science
+            </a>
+        </li>
+
+        <li>
+            <a href="#"
+            onclick="showCourseDetails(
+            'AI & Machine Learning',
+            'Learn Artificial Intelligence concepts and build smart AI systems.',
+            'AI, ML, Deep Learning, Neural Networks'
+            )">
+            AI & Machine Learning
+            </a>
+        </li>
+
+    </ul>
+
+</li>
+
+                <li class="dropdown">
+                    <a href="#">Faculty ▼</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dr.Ramesh Kumar</a></li>
+                        <li><a href="#">RaghuVira Pratap</a></li>
+                        <li><a href="#">Dr.N.Ksantosh</a></li>
+                    </ul>
+                </li>
+
+                <li>
+    <a href="#"
+    onclick="openAbout()">
+    About
+    </a>
+</li>
+                <li><a href="#">Contact</a></li>
+
+            </ul>
+        </nav>
+
+        <div class="search-box">
+
+    <input type="text"
+    id="searchInput"
+    placeholder="Search for courses 🔍"
+    onkeyup="searchCourses()">
+
+</div>
+
+        <div class="account"
+onclick="openAccount()">
+
+👤 Account
+
+</div>
+    </header>
+    <!-- COURSE DETAILS POPUP -->
+<!-- ACCOUNT POPUP -->
+
+<div class="popup" id="accountPopup">
+
+    <div class="popup-content">
+
+        <span class="close"
+        onclick="closeAccount()">×</span>
+
+        <h2>Login to LearnSphere</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <input type="email"
+            placeholder="Enter Email"
+            required>
+
+            <input type="password"
+            placeholder="Enter Password"
+            required>
+
+            <button type="submit"
+            class="submit-btn">
+
+            Login
+
+            </button>
+
+        </form>
+
+        <br>
+
+        <p style="text-align:center;">
+
+            Don't have an account?
+
+            <a href="#"
+            onclick="showSignup()">
+
+            Sign Up
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ACCOUNT POPUP -->
+
+<div class="popup" id="accountPopup">
+
+    <div class="popup-content">
+
+        <span class="close"
+        onclick="closeAccount()">×</span>
+
+        <h2>Login to LearnSphere</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <input type="email"
+            placeholder="Enter Email"
+            required>
+
+            <input type="password"
+            placeholder="Enter Password"
+            required>
+
+            <button type="submit"
+            class="submit-btn">
+
+            Login
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+<div class="popup" id="coursePopup">
+
+    <div class="popup-content">
+
+        <span class="close"
+        onclick="closeCoursePopup()">×</span>
+
+        <h2 id="courseTitle"></h2>
+
+        <p id="courseDescription"></p>
+
+        <br>
+
+        <h3>📘 What You Will Learn</h3>
+
+        <p id="courseSkills"></p>
+
+    </div>
+
+</div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="main-title">🌐 Popular Courses</h1>
+
+    <!-- COURSE SECTION -->
+
+    <div class="main">
+
+        <!-- WEB DEVELOPMENT -->
+
+        <div class="box2" data-course="web development">
+            <h2 style="text-align:center;">Web Development</h2>
+
+            <img src="webdev.jpg" class="image">
+
+            <p><b>Instructor :</b> Dr.Mahesh</p>
+            <p><b>Course Duration :</b> 8 Months</p>
+            <p><b>Price :</b> ₹4999/-</p>
+
+            <button class="button"
+            onclick="openForm('Web Development')">
+            Enroll Now
+            </button>
+        </div>
+
+        <!-- DATA SCIENCE -->
+
+        <div class="box2" data-course="data science">
+            <h2 style="text-align:center;">Data Science</h2>
+
+            <img src="datascience.jpg" class="image">
+
+            <p><b>Instructor :</b> Dr.Rajesh</p>
+            <p><b>Course Duration :</b> 12 Months</p>
+            <p><b>Price :</b> ₹8999/-</p>
+
+            <button class="button"
+            onclick="openForm('Data Science')">
+            Enroll Now
+            </button>
+        </div>
+
+        <!-- CYBER SECURITY -->
+
+        <div class="box2" data-course="cyber security">
+            <h2 style="text-align:center;">Cyber Security</h2>
+
+            <img src="cyber.jpg" class="image">
+
+            <p><b>Instructor :</b> Dr.Surekha</p>
+            <p><b>Course Duration :</b> 10 Months</p>
+            <p><b>Price :</b> ₹9999/-</p>
+
+            <button class="button"
+            onclick="openForm('Cyber Security')">
+            Enroll Now
+            </button>
+        </div>
+
+        <!-- AIML -->
+
+        <div class="box2">
+            <h2 style="text-align:center;">AIML</h2>
+
+            <img src="aiml.png" class="image">
+
+            <p><b>Instructor :</b> Dr.N.Ksantosh</p>
+            <p><b>Duration :</b> 8 Weeks</p>
+            <p><b>Price :</b> ₹4999/-</p>
+
+            <button class="button"
+            onclick="openForm('AIML')">
+            Enroll Now
+            </button>
+        </div>
+
+        <!-- QUANTUM -->
+
+        <div class="box2">
+            <h2 style="text-align:center;">Quantum Computing</h2>
+
+            <img src="quant.jpg" class="image">
+
+            <p><b>Instructor :</b> Dr.P.Ramesh</p>
+            <p><b>Duration :</b> 12 Weeks</p>
+            <p><b>Price :</b> ₹9999/-</p>
+
+            <button class="button"
+            onclick="openForm('Quantum Computing')">
+            Enroll Now
+            </button>
+        </div>
+
+        <!-- CLOUD -->
+
+        <div class="box2">
+            <h2 style="text-align:center;">Cloud Computing</h2>
+
+            <img src="cloud.jpeg" class="image">
+
+            <p><b>Instructor :</b> Dr.K.Sailaja</p>
+            <p><b>Duration :</b> 6 Weeks</p>
+            <p><b>Price :</b> ₹6999/-</p>
+
+            <button class="button"
+            onclick="openForm('Cloud Computing')">
+            Enroll Now
+            </button>
+        </div>
+
+    </div>
+
+    <!-- POPUP FORM -->
+
+    <div class="popup" id="popup">
+
+        <div class="popup-content">
+
+            <span class="close"
+            onclick="closeForm()">×</span>
+
+            <h2>Course Enrollment</h2>
+
+            <form onsubmit="submitForm(event)">
+
+                <input type="text"
+                placeholder="Enter Your Name"
+                required>
+
+                <input type="email"
+                placeholder="Enter Your Email"
+                required>
+
+                <input type="tel"
+                placeholder="Enter Mobile Number"
+                required>
+
+                <input type="text"
+                id="courseName"
+                readonly>
+
+                <select required>
+                    <option value="">Select Payment Method</option>
+                    <option>UPI</option>
+                    <option>Credit Card</option>
+                    <option>Debit Card</option>
+                </select>
+
+                <button type="submit"
+                class="submit-btn">
+                Confirm Enrollment
+                </button>
+
+                <div class="success"
+                id="successMsg">
+
+                    ✅ Enrollment Successful!
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+        /* ACCOUNT */
+
+function openAccount(){
+
+    document.getElementById("accountPopup")
+    .style.display="flex";
+}
+
+function closeAccount(){
+
+    document.getElementById("accountPopup")
+    .style.display="none";
+}
+
+function loginUser(event){
+
+    event.preventDefault();
+
+    alert("✅ Login Successful!");
+
+    document.getElementById("accountPopup")
+    .style.display="none";
+}
+        
+    /* ABOUT POPUP */
+
+function openAbout(){
+
+    document.getElementById("aboutPopup").style.display="flex";
+}
+
+function closeAbout(){
+
+    document.getElementById("aboutPopup").style.display="none";
+}
+
+/* SEARCH COURSES */
+
+function searchCourses(){
+
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    let cards =
+    document.querySelectorAll(".box2");
+
+    cards.forEach(function(card){
+
+        let course =
+        card.getAttribute("data-course");
+
+        if(course.includes(input)){
+
+            card.style.display="block";
+        }
+
+        else{
+
+            card.style.display="none";
+        }
+
+    });
+}
+        function showCourseDetails(title, description, skills){
+
+    document.getElementById("coursePopup").style.display="flex";
+
+    document.getElementById("courseTitle").innerHTML=title;
+
+    document.getElementById("courseDescription").innerHTML=description;
+
+    document.getElementById("courseSkills").innerHTML=skills;
+}
+
+function closeCoursePopup(){
+
+    document.getElementById("coursePopup").style.display="none";
+}
+        function openForm(course){
+
+            document.getElementById("popup").style.display="flex";
+
+            document.getElementById("courseName").value=course;
+        }
+
+        function closeForm(){
+
+            document.getElementById("popup").style.display="none";
+        }
+
+        function submitForm(event){
+
+            event.preventDefault();
+
+            document.getElementById("successMsg").style.display="block";
+
+            setTimeout(function(){
+
+                alert("Welcome to LearnSphere 🚀");
+
+                document.getElementById("popup").style.display="none";
+
+                document.getElementById("successMsg").style.display="none";
+
+            },2000);
+        }
+
+    </script>
+
+</body>
+
+</html>
