@@ -5,7 +5,6 @@
     <title>LearnSphere Courses</title>
 
     <link rel="stylesheet" href="style4.css">
-
     <style>
 
         *{
@@ -613,7 +612,7 @@ onclick="openAccount()">
 
         <!-- AIML -->
 
-        <div class="box2">
+        <div class="box2" data-course="aiml">
             <h2 style="text-align:center;">AIML</h2>
 
             <img src="aiml.png" class="image">
@@ -630,7 +629,7 @@ onclick="openAccount()">
 
         <!-- QUANTUM -->
 
-        <div class="box2">
+        <div class="box2" data-course="quantum computing">
             <h2 style="text-align:center;">Quantum Computing</h2>
 
             <img src="quant.jpg" class="image">
@@ -647,7 +646,7 @@ onclick="openAccount()">
 
         <!-- CLOUD -->
 
-        <div class="box2">
+        <div class="box2" data-course="cloud computing">
             <h2 style="text-align:center;">Cloud Computing</h2>
 
             <img src="cloud.jpeg" class="image">
@@ -720,116 +719,7 @@ onclick="openAccount()">
 
     <!-- JAVASCRIPT -->
 
-    <script>
-        /* ACCOUNT */
-
-function openAccount(){
-
-    document.getElementById("accountPopup")
-    .style.display="flex";
-}
-
-function closeAccount(){
-
-    document.getElementById("accountPopup")
-    .style.display="none";
-}
-
-function loginUser(event){
-
-    event.preventDefault();
-
-    alert("✅ Login Successful!");
-
-    document.getElementById("accountPopup")
-    .style.display="none";
-}
-        
-    /* ABOUT POPUP */
-
-function openAbout(){
-
-    document.getElementById("aboutPopup").style.display="flex";
-}
-
-function closeAbout(){
-
-    document.getElementById("aboutPopup").style.display="none";
-}
-
-/* SEARCH COURSES */
-
-function searchCourses(){
-
-    let input =
-    document.getElementById("searchInput")
-    .value.toLowerCase();
-
-    let cards =
-    document.querySelectorAll(".box2");
-
-    cards.forEach(function(card){
-
-        let course =
-        card.getAttribute("data-course");
-
-        if(course.includes(input)){
-
-            card.style.display="block";
-        }
-
-        else{
-
-            card.style.display="none";
-        }
-
-    });
-}
-        function showCourseDetails(title, description, skills){
-
-    document.getElementById("coursePopup").style.display="flex";
-
-    document.getElementById("courseTitle").innerHTML=title;
-
-    document.getElementById("courseDescription").innerHTML=description;
-
-    document.getElementById("courseSkills").innerHTML=skills;
-}
-
-function closeCoursePopup(){
-
-    document.getElementById("coursePopup").style.display="none";
-}
-        function openForm(course){
-
-            document.getElementById("popup").style.display="flex";
-
-            document.getElementById("courseName").value=course;
-        }
-
-        function closeForm(){
-
-            document.getElementById("popup").style.display="none";
-        }
-
-        function submitForm(event){
-
-            event.preventDefault();
-
-            document.getElementById("successMsg").style.display="block";
-
-            setTimeout(function(){
-
-                alert("Welcome to LearnSphere 🚀");
-
-                document.getElementById("popup").style.display="none";
-
-                document.getElementById("successMsg").style.display="none";
-
-            },2000);
-        }
-
-    </script>
+    <script src="Test.js"></script>
 
 </body>
 
